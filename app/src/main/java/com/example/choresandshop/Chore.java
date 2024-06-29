@@ -12,6 +12,7 @@ public class Chore {
         return name;
     }
 
+
     public Chore setName(String name) {
         this.name = name;
         return this;
