@@ -5,6 +5,7 @@ public class Chore {
     private String name;
     private int price;
 
+
     public Chore() {
     }
 
