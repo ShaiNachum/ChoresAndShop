@@ -47,4 +47,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.glide)
+
+    // Rest API calls
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

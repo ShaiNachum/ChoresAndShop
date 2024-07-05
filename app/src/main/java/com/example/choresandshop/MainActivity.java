@@ -23,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String superapp = getIntent().getStringExtra("superapp");
+        String email = getIntent().getStringExtra("email");
+        String avatar = getIntent().getStringExtra("avatar");
+
+        Bundle bundle = new Bundle();
+        bundle.putString("superapp", superapp);
+        bundle.putString("email", email);
+        bundle.putString("avatar", avatar);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -32,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        navController.setGraph(navController.getGraph(), bundle);
+
     }
 
 }
