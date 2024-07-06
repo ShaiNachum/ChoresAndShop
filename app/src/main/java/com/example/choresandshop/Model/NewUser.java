@@ -1,4 +1,4 @@
-package com.example.choresandshop;
+package com.example.choresandshop.Model;
 
 
 

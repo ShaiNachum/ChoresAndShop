@@ -1,4 +1,7 @@
-package com.example.choresandshop;
+package com.example.choresandshop.UserApi;
+
+import com.example.choresandshop.Model.NewUser;
+import com.example.choresandshop.Model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

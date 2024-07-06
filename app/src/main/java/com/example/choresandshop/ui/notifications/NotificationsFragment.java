@@ -14,8 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.choresandshop.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment { //Family Manager
-
     private FragmentNotificationsBinding binding;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

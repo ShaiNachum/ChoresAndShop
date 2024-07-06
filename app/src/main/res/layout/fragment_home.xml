@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:layoutDirection="ltr"
+
+    >
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/chores_MTV_choresText"
@@ -12,18 +15,20 @@
         android:layout_height="wrap_content"
         android:text="Chores"
         android:textSize="30sp"
-        android:textStyle="bold"
+        android:textStyle="italic"
         android:gravity="center"
-        android:layout_below="@id/text_home"
-
         >
 
     </com.google.android.material.textview.MaterialTextView>
+<!--        android:layout_below="@id/text_home"-->
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chore_RV_list"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="380dp"
         android:layout_below="@+id/chores_MTV_choresText"
         android:layout_marginTop="20sp"
 
@@ -39,7 +44,7 @@
         android:text="New chore"
         android:layout_below="@id/chore_RV_list"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+
 
         >
 
@@ -47,17 +52,17 @@
 
 
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/text_home"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 </RelativeLayout>

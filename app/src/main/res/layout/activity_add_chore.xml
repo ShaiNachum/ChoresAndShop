@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddChoreActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/add_chore_LBL_enter_name"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="128dp"
+        android:layout_marginTop="64dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:textColor="@color/primary_color"
+        android:text="@string/enter_name"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_chore_EDT_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_chore_LBL_enter_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/name"
+        android:minHeight="48dp"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/add_chore_LBL_enter_price"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="128dp"
+        android:layout_marginTop="64dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:textColor="@color/primary_color"
+        android:layout_below="@+id/add_chore_EDT_name"
+        android:text="@string/enter_price"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/add_chore_EDT_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_chore_LBL_enter_price"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/price"
+        android:minHeight="48dp"
+        />
+
+</RelativeLayout>

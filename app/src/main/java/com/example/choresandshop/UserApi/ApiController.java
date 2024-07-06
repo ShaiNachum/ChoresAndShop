@@ -1,9 +1,9 @@
-package com.example.choresandshop;
+package com.example.choresandshop.UserApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserController {//implements Callback<ResponseBody> {
+public class ApiController {//implements Callback<ResponseBody> {
 
 //    private UserCallback userCallback;
     private static final String BASE_URL = "http://172.20.10.13:8084/superapp/";
