@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chore_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+
+
     <LinearLayout
+        android:id="@+id/chore_LL_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -64,5 +73,21 @@
 
 
     </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/chores_MTV_DoneBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chore_LL_details"
+        android:text="Done By: XXX"
+        android:layout_marginLeft="20dp"
+        android:textStyle="italic"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        >
+
+    </com.google.android.material.textview.MaterialTextView>
+    </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>

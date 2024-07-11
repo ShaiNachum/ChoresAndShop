@@ -24,7 +24,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shop_RV_list"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="380dp"
         android:layout_below="@+id/chores_MTV_choresText"
         android:layout_marginTop="20sp"
 
@@ -40,8 +40,6 @@
         android:text="New prize"
         android:layout_below="@id/shop_RV_list"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-
         >
 
     </com.google.android.material.button.MaterialButton>
@@ -56,11 +54,11 @@
         android:id="@+id/text_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="0sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

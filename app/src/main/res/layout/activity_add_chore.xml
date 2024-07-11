@@ -60,4 +60,16 @@
         android:minHeight="48dp"
         />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_chore_BTN_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_centerHorizontal="true"
+        android:text="Create"
+        >
+
+    </com.google.android.material.button.MaterialButton>
+
 </RelativeLayout>

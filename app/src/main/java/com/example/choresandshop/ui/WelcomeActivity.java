@@ -71,7 +71,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 } else {
                     //Log.e("Retrofit", "Failed to retrieve user. Error code: " + response.code());
                     Toast.makeText(WelcomeActivity.this, "Failed to log in ", Toast.LENGTH_LONG).show();
-
                 }
             }
 
@@ -94,14 +93,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
         NewUser newUser = new NewUser();
         newUser.setEmail(email);
-
-        if(isChild)
+        newUser.setRole(UserRoleEnum.SUPERAPP_USER);
+        if(isChild) {
             newUser.setAvatar("child#0");
-        else
+        }
+        else {
             newUser.setAvatar("parent#0");
-
+        }
         newUser.setUsername(playerName);
-        newUser.setRole(UserRoleEnum.MINIAPP_USER);
 
         Call<NewUser> call = apiService.createUser(newUser);
         call.enqueue(new Callback<NewUser>() {

@@ -23,7 +23,7 @@ public interface UserApi {
     );
 
     @PUT("users/{superapp}/{userEmail}")
-    Call<User> updateUser(
+    Call<Void> updateUser(
             @Path("superapp") String superapp,
             @Path("userEmail")String userEmail,
             @Body User updatedUser
