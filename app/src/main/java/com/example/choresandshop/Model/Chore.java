@@ -6,6 +6,7 @@ public class Chore {
     private String name;
     private int price;
     private boolean done;
+    private String doneBy;
 
 
     public Chore() {
@@ -45,6 +46,15 @@ public class Chore {
 
     public Chore setDone(boolean done) {
         this.done = done;
+        return this;
+    }
+
+    public String getDoneBy() {
+        return doneBy;
+    }
+
+    public Chore setDoneBy(String doneBy) {
+        this.doneBy = doneBy;
         return this;
     }
 }

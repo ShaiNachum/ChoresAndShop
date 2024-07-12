@@ -11,4 +11,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="price">Price</string>
     <string name="enter_price">Enter Price</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

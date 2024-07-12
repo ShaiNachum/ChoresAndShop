@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,24 +19,18 @@ import com.example.choresandshop.Callbacks.ChoreCheckedCallback;
 import com.example.choresandshop.CurrentUserManager;
 import com.example.choresandshop.Model.Chore;
 import com.example.choresandshop.Adapters.ChoresAdapter;
-import com.example.choresandshop.Model.CreatedBy;
 import com.example.choresandshop.Model.Object;
 import com.example.choresandshop.Model.User;
-import com.example.choresandshop.Model.UserId;
 import com.example.choresandshop.R;
 import com.example.choresandshop.UserApi.ApiController;
 import com.example.choresandshop.UserApi.ObjectApi;
 import com.example.choresandshop.UserApi.UserApi;
 import com.example.choresandshop.databinding.FragmentHomeBinding;
 import com.example.choresandshop.ui.AddChoreActivity;
-import com.example.choresandshop.ui.MainActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -125,7 +118,8 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
             chore.setName(object.getType());
             chore.setPrice(Integer.parseInt(alias[1]));
             chore.setDone(!object.getActive());
-            //TODO: chore.setDoneBy
+            if(chore.isDone())
+                chore.setDoneBy(object.getObjectDetails().get("Done by").toString().split("@")[0]);
             chores.add(chore);
         }
         choresAdapter = new ChoresAdapter(view.getContext(),chores,this);
@@ -147,7 +141,7 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
 
         //TODO add coins to user
         String[] NewAvatar = currentUserManager.getUser().getAvatar().split("#");
-        NewAvatar[0] = (Integer.valueOf(NewAvatar[1]) +chore.getPrice()) +"";
+        NewAvatar[1] = (Integer.valueOf(NewAvatar[1]) +chore.getPrice()) +"";
         currentUserManager.getUser().setAvatar(NewAvatar[0] +"#" + NewAvatar[1]);
         Call<Void> call = userApi.updateUser(
                 "MiniHeros"

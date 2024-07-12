@@ -21,32 +21,7 @@
         android:textColor="@color/primary_color"
         android:text="@string/welcome"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/welcome_LBL_enter_name"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="128dp"
-        android:layout_marginTop="64dp"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:textStyle="bold|italic"
-        android:autoSizeTextType="uniform"
-        android:maxLines="1"
-        android:textColor="@color/primary_color"
-        android:text="@string/enter_name"
-        android:layout_below="@+id/welcome_LBL_welcome"
-        />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/welcome_EDT_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/welcome_LBL_enter_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/name"
-        android:minHeight="48dp"
-        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/welcome_LBL_enter_email"
@@ -60,7 +35,7 @@
         android:maxLines="1"
         android:textColor="@color/primary_color"
         android:text="@string/enter_email"
-        android:layout_below="@+id/welcome_EDT_name"
+        android:layout_below="@+id/welcome_LBL_welcome"
         />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -75,64 +50,32 @@
         android:minHeight="48dp"
         />
 
-    <LinearLayout
-        android:id="@+id/welcome_CB_parent_or_child"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/welcome_BTN_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/welcome_EDT_email">
+        android:layout_above="@id/welcome_MTV_signUp"
+        android:text="Log In" />
 
-        <CheckBox
-            android:id="@+id/welcome_CB_parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Parent"
-            android:layout_marginBottom="8dp"/>
-
-        <View
-            android:layout_width="32dp"
-            android:layout_height="0dp"/>
-
-        <CheckBox
-            android:id="@+id/welcome_CB_child"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Child"/>
-
-    </LinearLayout>
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/main_LL_attempts_score"
-        android:layout_width="match_parent"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/welcome_MTV_signUp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
+        android:text="Don't have user? Click here!"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
         >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/welcome_BTN_signup"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="Sign Up" />
+    </com.google.android.material.textview.MaterialTextView>
 
-        <View
-            android:layout_width="32dp"
-            android:layout_height="0dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/welcome_BTN_login"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="Log In" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </RelativeLayout>

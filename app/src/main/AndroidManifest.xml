@@ -16,6 +16,12 @@
         android:theme="@style/Theme.ChoresAndShop"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ActivitySignUp"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SightUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.PrizePage"
             android:exported="false" />
         <activity

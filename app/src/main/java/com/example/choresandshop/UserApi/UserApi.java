@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 public interface UserApi {
 
     @POST("users")
-    Call<NewUser> createUser(@Body NewUser newUser);
+    Call<User> createUser(@Body NewUser newUser);
 
     @GET("users/login/{superapp}/{email}")
     Call<User> findUser(

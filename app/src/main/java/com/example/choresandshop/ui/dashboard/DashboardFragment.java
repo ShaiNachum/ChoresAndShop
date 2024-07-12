@@ -59,12 +59,8 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-//        final TextView textView = binding.textDashboard;
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -128,6 +124,8 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
             shopItem.setName(object.getType());
             shopItem.setPrice(Integer.parseInt(alias[1]));
             shopItem.setPurchased(!object.getActive());
+            if(shopItem.isPurchased())
+                shopItem.setPurchasedBy(object.getObjectDetails().get("Purchased by").toString());
             shopItems.add(shopItem);
 
         }
@@ -142,9 +140,9 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
         Object object = fetchedObjects.get(position);
         int userBalance = Integer.parseInt(currentUserManager.getUser().getAvatar().split("#")[1]);
         int prizePrice = Integer.parseInt(object.getAlias().split("#")[1]);
-//        if (prizePrice > userBalance) {
-//            Toast.makeText(requireContext(), "Not enough coins ", Toast.LENGTH_SHORT).show();
-//        } else {
+        if (prizePrice > userBalance) {
+            Toast.makeText(requireContext(), "Not enough coins ", Toast.LENGTH_SHORT).show();
+        } else {
             String[] newAvatar = currentUserManager.getUser().getAvatar().split("#");
             newAvatar[1] = (userBalance - prizePrice) + "";
             currentUserManager.getUser().setAvatar(newAvatar[0] + "#" + newAvatar[1]);
@@ -154,7 +152,7 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(getContext(), "Successfully updated object", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Successfully updated user", Toast.LENGTH_SHORT).show();
                     updateObjectPurchasedInDB(object);
                 }
 
@@ -165,13 +163,14 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
                 }
             });
         }
-  //  }
+    }
 
     public void updateObjectPurchasedInDB(Object o){
         Map<String, java.lang.Object> NewObjectDetails = o.getObjectDetails();
         NewObjectDetails.put("Purchased by",currentUserManager.getUser().getUserId().getEmail());
         o.setObjectDetails(NewObjectDetails);
         o.setActive(false);
+        o.setCreationTimestamp(null);
         Call<Void> call = objectApi.updateObject(
                 "MiniHeros"
                 ,o.getObjectId().getId()

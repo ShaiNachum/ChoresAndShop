@@ -48,6 +48,7 @@ public class ChoresAdapter extends RecyclerView.Adapter<ChoresAdapter.ChoresView
         holder.choreName.setText(chore.getName());
         holder.chorePrice.setText(String.valueOf(chore.getPrice()));
         holder.doneCheckBox.setChecked(chore.isDone());
+        holder.chores_MTV_DoneBy.setText("Done By: " + chore.getDoneBy());
         if(currentUserManager.getUser().getAvatar().split("#")[0].equals("parent")) {
             holder.doneCheckBox.setVisibility(View.INVISIBLE);
             if (chore.isDone())
@@ -60,6 +61,18 @@ public class ChoresAdapter extends RecyclerView.Adapter<ChoresAdapter.ChoresView
                 holder.doneCheckBox.setEnabled(true);
                 holder.chores_MTV_DoneBy.setVisibility(View.GONE);
             }
+
+        holder.doneCheckBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+            //position = holder.getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                choreCheckedCallback.onChoreChecked(position, isChecked);
+                if (isChecked) {
+                    holder.doneCheckBox.setEnabled(false);
+                }
+                chore.setDoneBy(currentUserManager.getUser().getUserId().getEmail().split("@")[0]);
+                notifyItemChanged(position);
+            }
+        }));
 
     }
 
@@ -86,15 +99,15 @@ public class ChoresAdapter extends RecyclerView.Adapter<ChoresAdapter.ChoresView
             chores_MTV_DoneBy = itemView.findViewById(R.id.chores_MTV_DoneBy);
             chore_card = itemView.findViewById(R.id.chore_card);
             //TODO doneCheckBox listener
-            doneCheckBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    choreCheckedCallback.onChoreChecked(position, isChecked);
-                    if (isChecked) {
-                        doneCheckBox.setEnabled(false);
-                    }
-                }
-            }));
+//            doneCheckBox.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+//                int position = getAdapterPosition();
+//                if (position != RecyclerView.NO_POSITION) {
+//                    choreCheckedCallback.onChoreChecked(position, isChecked);
+//                    if (isChecked) {
+//                        doneCheckBox.setEnabled(false);
+//                    }
+//                }
+//            }));
         }
     }
 }

@@ -46,17 +46,39 @@ public class PrizeAdapter extends RecyclerView.Adapter<PrizeAdapter.PrizesViewHo
         ShopItem shopItem = shopItems.get(position);
         holder.prize_MTV_description.setText(shopItem.getName());
         holder.prize_MTV_price.setText(String.valueOf(shopItem.getPrice()));
-        if (currentUserManager.getUser().getAvatar().split("#")[0].equals("parent")) {
+        String[] avatar =currentUserManager.getUser().getAvatar().split("#");
+        if (avatar[0].equals("parent")) {
             holder.prize_MB_buy.setVisibility(View.GONE);
         }
         if(shopItem.isPurchased())
         {
             holder.prize_MB_buy.setVisibility(View.GONE);
-            holder.prize_MTV_PurchasedBy.setText("Purchased by " + shopItem.getPurchasedBy());
+            holder.prize_MTV_PurchasedBy.setText("Purchased by " + shopItem.getPurchasedBy().split("@")[0]);
         }
         else{
             holder.prize_MTV_PurchasedBy.setVisibility(View.GONE);
         }
+        if(Integer.parseInt(avatar[1])>=shopItem.getPrice())
+        {
+            //enable click
+            holder.prize_MB_buy.setEnabled(true);
+        }
+        else{
+            //unable click
+            holder.prize_MB_buy.setEnabled(false);
+        }
+        holder.prize_MB_buy.setOnClickListener(v -> {
+//        int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                prizePurchaseCallback.purchasePressed(position);
+                //check if enough coins
+                shopItem.setPurchased(true);
+                shopItem.setPurchasedBy(currentUserManager.getUser().getUserId().getEmail().split("@")[0]);
+                notifyItemChanged(position);
+
+            }
+        });
+
 
     }
 
@@ -80,12 +102,12 @@ public class PrizeAdapter extends RecyclerView.Adapter<PrizeAdapter.PrizesViewHo
             prize_MTV_price = itemView.findViewById(R.id.prize_MTV_price);
             prize_MB_buy = itemView.findViewById(R.id.prize_MB_buy);
             prize_MTV_PurchasedBy = itemView.findViewById(R.id.prize_MTV_PurchasedBy);
-            prize_MB_buy.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    prizePurchaseCallback.purchasePressed(position);
-                }
-            });
+//            prize_MB_buy.setOnClickListener(v -> {
+//                int position = getAdapterPosition();
+//                if (position != RecyclerView.NO_POSITION) {
+//                    prizePurchaseCallback.purchasePressed(position);
+//                }
+//            });
         }
     }
 

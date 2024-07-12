@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ActivitySignUp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/signup_LBL_signUp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="64dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:textColor="@color/primary_color"
+        android:text="@string/sign_up"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/signup_LBL_enter_familyName"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="75dp"
+        android:layout_marginTop="64dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:textColor="@color/primary_color"
+        android:text="Enter Family Name"
+        android:layout_below="@+id/signup_LBL_signUp"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_EDT_familyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup_LBL_enter_familyName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:hint="Family Name"
+        android:minHeight="48dp"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/signup_LBL_enter_email"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="128dp"
+        android:layout_marginTop="32dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:textColor="@color/primary_color"
+        android:text="@string/enter_email"
+        android:layout_below="@+id/signup_EDT_familyName"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_EDT_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup_LBL_enter_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/email"
+        android:minHeight="48dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/signup_CB_parent_or_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/signup_EDT_email">
+
+        <CheckBox
+            android:id="@+id/signup_CB_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parent"
+            android:layout_marginBottom="8dp"/>
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="0dp"/>
+
+        <CheckBox
+            android:id="@+id/signup_CB_child"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Child"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signup_BTN_signup"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:text="Sign Up" />
+
+</RelativeLayout>
