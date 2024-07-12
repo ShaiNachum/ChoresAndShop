@@ -19,12 +19,6 @@
             android:name=".ui.ActivitySignUp"
             android:exported="false" />
         <activity
-            android:name=".ui.SightUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.PrizePage"
-            android:exported="false" />
-        <activity
             android:name=".ui.AddPrizeActivity"
             android:exported="false" />
         <activity
