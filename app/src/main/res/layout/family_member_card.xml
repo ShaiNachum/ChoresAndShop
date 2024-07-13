@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:id="@+id/FMC_RL"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/FMC_MTV_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: XXXXX"
+            android:textSize="30sp"
+            android:layout_alignParentLeft="true"
+            >
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/FMC_MTV_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Points: 100"
+            android:textSize="30sp"
+            android:layout_alignParentRight="true"
+            >
+        </com.google.android.material.textview.MaterialTextView>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
