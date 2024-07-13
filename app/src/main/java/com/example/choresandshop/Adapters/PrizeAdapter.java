@@ -75,6 +75,7 @@ public class PrizeAdapter extends RecyclerView.Adapter<PrizeAdapter.PrizesViewHo
                 shopItem.setPurchased(true);
                 shopItem.setPurchasedBy(currentUserManager.getUser().getUserId().getEmail().split("@")[0]);
                 notifyItemChanged(position);
+                notifyDataSetChanged();
 
             }
         });

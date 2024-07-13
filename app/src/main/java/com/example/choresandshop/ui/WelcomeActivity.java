@@ -37,14 +37,10 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
         this.isChild = false;
-
         findViews();
         initViews();
     }
-
-
     private void logInClicked() {
         String email = welcome_EDT_email.getText().toString();
         Call<User> call = apiService.findUser("MiniHeros", email);
@@ -52,11 +48,9 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
-
                 if (response.isSuccessful()  && user != null) {
                     Toast.makeText(WelcomeActivity.this, "Hello " + user.getUsername().toString(), Toast.LENGTH_LONG).show();
                     SwitchToMainActivty(user);
-
                 } else {
                     //Log.e("Retrofit", "Failed to retrieve user. Error code: " + response.code());
                     Toast.makeText(WelcomeActivity.this, "Failed to log in ", Toast.LENGTH_LONG).show();

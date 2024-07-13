@@ -28,9 +28,12 @@ import com.example.choresandshop.UserApi.UserApi;
 import com.example.choresandshop.databinding.FragmentHomeBinding;
 import com.example.choresandshop.ui.AddChoreActivity;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -46,7 +49,10 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
     private UserApi userApi;
     private CurrentUserManager currentUserManager;
     private ArrayList<Chore> chores;
-
+    private ShapeableImageView chore_SIV_right;
+    private ShapeableImageView chore_SIV_left;
+    private static int CurrentPage = 0;
+    private static int PageSize = 8;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,7 +69,7 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         currentUserManager = CurrentUserManager.getInstance();
-        objectApi =  ApiController.getRetrofitInstance().create(ObjectApi.class);
+        objectApi = ApiController.getRetrofitInstance().create(ObjectApi.class);
         userApi = ApiController.getRetrofitInstance().create(UserApi.class);
         findViews(view);
         initViews(view);
@@ -72,12 +78,13 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
     private void findViews(View view) {
         chore_RV_list = view.findViewById(R.id.chore_RV_list);
         chore_MB_NewChore = view.findViewById(R.id.chore_MB_NewChore);
-
+        chore_SIV_right = view.findViewById(R.id.chore_SIV_right);
+        chore_SIV_left = view.findViewById(R.id.chore_SIV_left);
     }
 
     private void initViews(View view) {
         User user = currentUserManager.getUser();
-        if(currentUserManager.getUser().getAvatar().split("#")[0].equals("parent"))
+        if (currentUserManager.getUser().getAvatar().split("#")[0].equals("parent"))
             chore_MB_NewChore.setVisibility(View.VISIBLE);
         else
             chore_MB_NewChore.setVisibility(View.INVISIBLE);
@@ -85,8 +92,30 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
             Intent intent = new Intent(getActivity(), AddChoreActivity.class);
             startActivity(intent);
         });
-//        ArrayList<Chore> chores = new ArrayList<>();
-        Call<Object[]> call = objectApi.getChores("CHORE%", "MiniHeros", user.getUserId().getEmail(), 10, 0);
+        PaginationSupprot(view);
+    }
+
+    public void PaginationSupprot(View view) {
+        chore_SIV_right.setOnClickListener(v -> {
+            CurrentPage++;
+            ReadDataFromDB(view);
+        });
+
+        chore_SIV_left.setOnClickListener(v -> {
+            CurrentPage--;
+            ReadDataFromDB(view);
+        });
+        ReadDataFromDB(view);
+    }
+
+
+        public void ReadDataFromDB(View view){
+        User user = currentUserManager.getUser();
+            if (CurrentPage == 0)
+                chore_SIV_left.setVisibility(View.INVISIBLE);
+            else
+                chore_SIV_left.setVisibility(View.VISIBLE);
+        Call<Object[]> call = objectApi.getChores("CHORE%", "MiniHeros", user.getUserId().getEmail(), PageSize, CurrentPage);
         call.enqueue(new Callback<Object[]>() {
             @Override
             public void onResponse(Call<Object[]> call, Response<Object[]> response) {
@@ -94,6 +123,8 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
                     Object[] FetchedObjects = response.body();
                     if(FetchedObjects != null){
                         FetchDataToAdapter(view,new ArrayList<>(Arrays.asList(FetchedObjects)));
+                        checkNextPage(view);
+
                     }
                     else {
                         FetchDataToAdapter(view,new ArrayList<>());
@@ -108,6 +139,35 @@ public class HomeFragment extends Fragment implements ChoreCheckedCallback { //C
             }
         });
     }
+
+    public void checkNextPage(View view) {
+        User user = currentUserManager.getUser();
+        Call<Object[]> call = objectApi.getChores("CHORE%", "MiniHeros", user.getUserId().getEmail(), PageSize, CurrentPage + 1);
+        call.enqueue(new Callback<Object[]>() {
+            @Override
+            public void onResponse(Call<Object[]> call, Response<Object[]> response) {
+                if (response.isSuccessful()) {
+                    Object[] FetchedObjects = response.body();
+                    if (FetchedObjects != null) {
+                        if (FetchedObjects.length == 0)
+                            chore_SIV_right.setVisibility(View.INVISIBLE);
+                        else
+                            chore_SIV_right.setVisibility(View.VISIBLE);
+                    } else {
+                        FetchDataToAdapter(view, new ArrayList<>());
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch objects", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object[]> call, Throwable t) {
+                Toast.makeText(requireContext(), "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void FetchDataToAdapter(View view,ArrayList<Object> objects){
         chores = new ArrayList<>();
         for (Object object:objects)

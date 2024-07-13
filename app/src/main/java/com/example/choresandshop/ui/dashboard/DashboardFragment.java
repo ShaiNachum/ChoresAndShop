@@ -32,6 +32,7 @@ import com.example.choresandshop.databinding.FragmentDashboardBinding;
 import com.example.choresandshop.ui.AddChoreActivity;
 import com.example.choresandshop.ui.AddPrizeActivity;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -51,6 +52,10 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
     private UserApi userApi;
     private PrizeAdapter prizeAdapter;
     private ArrayList<Object> fetchedObjects;
+    private ShapeableImageView shop_SIV_right;
+    private ShapeableImageView shop_SIV_left;
+    private static int CurrentPage = 0;
+    private static int PageSize = 4;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
         View root = binding.getRoot();
         return root;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -74,6 +80,8 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
     private void findVies(View view) {
         shop_RV_list = view.findViewById(R.id.shop_RV_list);
         shop_MB_NewPrize = view.findViewById(R.id.shop_MB_NewPrize);
+        shop_SIV_right = view.findViewById(R.id.shop_SIV_right);
+        shop_SIV_left = view.findViewById(R.id.shop_SIV_left);
     }
 
     private void initViews(View view) {
@@ -86,7 +94,30 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
             Intent intent = new Intent(getActivity(), AddPrizeActivity.class);
             startActivity(intent);
         });
-        Call<Object[]> call = objectApi.getChores("PRIZE%", "MiniHeros", user.getUserId().getEmail(), 10, 0);
+        PaginationSupport(view);
+
+    }
+
+    public void PaginationSupport(View view) {
+        shop_SIV_right.setOnClickListener(v -> {
+            CurrentPage++;
+            ReadDataFromDB(view);
+        });
+        shop_SIV_left.setOnClickListener(v -> {
+            CurrentPage--;
+            ReadDataFromDB(view);
+        });
+
+        ReadDataFromDB(view);
+    }
+
+    public void ReadDataFromDB(View view){
+        User user = currentUserManager.getUser();
+        if (CurrentPage == 0)
+            shop_SIV_left.setVisibility(View.INVISIBLE);
+        else
+            shop_SIV_left.setVisibility(View.VISIBLE);
+        Call<Object[]> call = objectApi.getChores("PRIZE%", "MiniHeros", user.getUserId().getEmail(), PageSize, CurrentPage);
         call.enqueue(new Callback<Object[]>() {
             @Override
             public void onResponse(Call<Object[]> call, Response<Object[]> response) {
@@ -94,6 +125,7 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
                     Object[] FetchedObjects = response.body();
                     if (FetchedObjects != null) {
                         FetchDataToAdapter(view, new ArrayList<>(Arrays.asList(FetchedObjects)));
+                        checkNextPage(view);
                     } else {
                         FetchDataToAdapter(view, new ArrayList<>());
                     }
@@ -101,13 +133,40 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
                     Toast.makeText(requireContext(), "Failed to fetch objects", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<Object[]> call, Throwable t) {
                 Toast.makeText(requireContext(), "Network error", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    public void checkNextPage(View view){
+        User user = currentUserManager.getUser();
+        Call<Object[]> call = objectApi.getChores("PRIZE%", "MiniHeros", user.getUserId().getEmail(), PageSize, CurrentPage+1);
+        call.enqueue(new Callback<Object[]>() {
+            @Override
+            public void onResponse(Call<Object[]> call, Response<Object[]> response) {
+                if (response.isSuccessful()) {
+                    Object[] FetchedObjects = response.body();
+                    if (FetchedObjects != null) {
+                        if(FetchedObjects.length==0)
+                            shop_SIV_right.setVisibility(View.INVISIBLE);
+                        else
+                            shop_SIV_right.setVisibility(View.VISIBLE);
+                    } else {
+                        FetchDataToAdapter(view, new ArrayList<>());
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch objects", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Object[]> call, Throwable t) {
+                Toast.makeText(requireContext(), "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {

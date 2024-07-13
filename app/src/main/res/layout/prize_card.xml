@@ -28,6 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="fitCenter"
+            android:layout_below="@id/prize_MTV_description"
+            android:src="@drawable/ic_prise"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             >
         </ImageView>
 

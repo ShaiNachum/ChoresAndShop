@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
     android:layoutDirection="ltr"
-
     >
 
     <com.google.android.material.textview.MaterialTextView
@@ -49,6 +48,31 @@
         >
 
     </com.google.android.material.button.MaterialButton>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/chore_SIV_right"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_toRightOf="@id/chore_MB_NewChore"
+        android:layout_below="@id/chore_RV_list"
+        android:layout_marginLeft="40dp"
+        android:src="@drawable/baseline_arrow_right_24"
+        android:visibility="invisible"
+        >
+    </com.google.android.material.imageview.ShapeableImageView>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/chore_SIV_left"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_toLeftOf="@id/chore_MB_NewChore"
+        android:layout_below="@id/chore_RV_list"
+        android:layout_marginRight="40dp"
+        android:src="@drawable/baseline_arrow_left_24"
+        android:visibility="invisible"
+
+        >
+    </com.google.android.material.imageview.ShapeableImageView>
 
 
 

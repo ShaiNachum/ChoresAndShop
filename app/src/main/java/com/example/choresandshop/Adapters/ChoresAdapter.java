@@ -19,6 +19,8 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ChoresAdapter extends RecyclerView.Adapter<ChoresAdapter.ChoresViewHolder> {
 
@@ -34,6 +36,8 @@ public class ChoresAdapter extends RecyclerView.Adapter<ChoresAdapter.ChoresView
         this.choreCheckedCallback = choreCheckedCallback;
         currentUserManager = CurrentUserManager.getInstance();
     }
+
+
 
     @NonNull
     @Override
