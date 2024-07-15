@@ -56,7 +56,6 @@ public class AddChoreActivity extends AppCompatActivity {
 
     private void initViews() {
         add_chore_BTN_create.setOnClickListener(v -> {
-            //TODO:Create Object
             Object object = new Object();
             object.setObjectDetails(new HashMap<>());
             object.setActive(true);
@@ -68,7 +67,6 @@ public class AddChoreActivity extends AppCompatActivity {
             CreatedBy createdBy = new CreatedBy();
             createdBy.setUserId(userId);
             object.setCreatedBy(createdBy);
-            // TODO: POST
             Call<Object> call = ObjectApiService.createObject(object);
             call.enqueue(new Callback<Object>() {
                 @Override
@@ -89,7 +87,6 @@ public class AddChoreActivity extends AppCompatActivity {
 
                 }
             });
-            // TODO: Close activity
             Intent intent = new Intent(AddChoreActivity.this, MainActivity.class);
             startActivity(intent);
             this.finish();

@@ -59,7 +59,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e("Retrofit", "Network error or failure: " + t.getMessage());
-                Toast.makeText(WelcomeActivity.this, "SHIT HAPPENS ", Toast.LENGTH_LONG).show();
+                Toast.makeText(WelcomeActivity.this, "SHIT HAPPENS ;)", Toast.LENGTH_LONG).show();
             }
         });
     }

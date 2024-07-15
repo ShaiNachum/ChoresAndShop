@@ -57,6 +57,7 @@ public class DashboardFragment extends Fragment implements PrizePurchaseCallback
     private static int CurrentPage = 0;
     private static int PageSize = 4;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
