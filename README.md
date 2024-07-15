@@ -4,19 +4,28 @@
 
 ## Project Explenation:
   We were asked to create miniApps that will be the client side for the server we built.
-  In this miniApp each parent will be able to add more chores and prizes to buy in the shop.
-  The children will be able to see the chores and use the coins they collected to buy prizes.
-  
+  This repository contains an Android application designed to manage chores and a reward system for 
+  a family. The app includes features such as tracking chores, purchasing prizes, and viewing family 
+  member information.
 
 ### The Features:
   * User Authentication: Sign up and login functionality using Retrofit and a REST API.
+  * Chore Management: Users can view and mark chores as done. Parents have the ability to create new     chores.
+  * Reward System: Children can purchase prizes using points earned from completing chores.
+  * Family Member Management: Displays a list of family members, sorted by role and points.
+  * Pagination Support: Efficiently loads data with pagination to handle large lists of chores and       prizes.
+  * User Role Handling: Different views and actions based on whether the user is a parent or a child.
+  * Dashboard: Displays a list of items (prizes) with pagination support.
+  * Item Management: Users can add new items (chores or prizes).
+  * Purchase Functionality: Users can purchase items from the dashboard.
  
 ### Technologies Used:
   * Java: Main programming language used for development.
-
-
-### Usage:
-
+  * Retrofit: For making network requests.
+  * Material Components: For UI elements.
+  * RecyclerView: For displaying lists of items.
+  * Pagination: To handle large datasets efficiently.
+  * Android SDK: Core development framework.
 
 ### Video Example:
 
